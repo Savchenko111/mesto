@@ -1,0 +1,12 @@
+.card__like {
+  max-width: 22px;
+  min-height: 19px;
+  vertical-align: bottom;
+  padding-left: 25px;
+  padding-right: 5px;
+}
+
+.card__like:hover {
+  opacity: 50%;
+  transition: opacity 0.5s linear;
+}
