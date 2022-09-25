@@ -1,9 +1,14 @@
 .card__like {
+  all: initial;
+  background-image: url(../../../images/like-disabled.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
   max-width: 22px;
   min-height: 19px;
   vertical-align: bottom;
   padding-left: 25px;
   padding-right: 5px;
+  cursor: pointer;
 }
 
 .card__like:hover {

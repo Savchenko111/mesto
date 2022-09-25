@@ -10,8 +10,8 @@
 
 @media screen and (max-width: 750px) {
   .profile__profession {
-    margin: auto;
     grid-column: span 2;
+    text-align: center;
   }
 }
 

@@ -8,7 +8,7 @@
   <title>Место</title>
 </head>
 <body class="page">
-  <div class="content">
+  <div class="page__wrapper">
     <header class="header">
       <div class="header__logo"></div>
     </header>
@@ -23,47 +23,47 @@
         <button type="button" class="profile__add-button" aria-label="Добавить"></button>
       </section>
       <section class="cards">
-        <ul class="cards-list">
+        <ul class="cards__list">
           <li class="card">
             <img src="./images/alpiiskiy-lug.jpg" class="card__image" alt="Альпийский луг">
             <div class="card__content">
               <h2 class="card__title">Альпийский луг</h2>
-              <img src="./images/like.png" class="card__like" alt="Лайк">
+              <button class="card__like" type="button" aria-label="Лайк"></button>
             </div>
           </li>
           <li class="card">
-            <img src="./images/gora-elbrus.png" class="card__image" alt="гора Эльбрус">
+            <img src="./images/ozero.jpg" class="card__image" alt="озеро в Карелии">
             <div class="card__content">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <img src="./images/like.png" class="card__like" alt="Лайк">
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/Dombai.png" class="card__image" alt="Домбай">
-            <div class="card__content">
-              <h2 class="card__title">Домбай</h2>
-              <img src="./images/like.png" class="card__like" alt="Лайк">
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/gora-elbrus.png" class="card__image" alt="гора Эльбрус">
-            <div class="card__content">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <img src="./images/like.png" class="card__like" alt="Лайк">
+              <h2 class="card__title">Карелия</h2>
+              <button class="card__like" type="button" aria-label="Лайк"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/Dombai.png" class="card__image" alt="Домбай">
             <div class="card__content">
               <h2 class="card__title">Домбай</h2>
-              <img src="./images/like.png" class="card__like" alt="Лайк">
+              <button class="card__like" type="button" aria-label="Лайк"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/gora-elbrus.png" class="card__image" alt="гора Эльбрус">
+            <div class="card__content">
+              <h2 class="card__title">Гора Эльбрус</h2>
+              <button class="card__like" type="button" aria-label="Лайк"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/Dombai.png" class="card__image" alt="Домбай">
+            <div class="card__content">
+              <h2 class="card__title">Домбай</h2>
+              <button class="card__like" type="button" aria-label="Лайк"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/Karachaevsk.png" class="card__image" alt="Карачаево-Черкессия">
             <div class="card__content">
               <h2 class="card__title">Карачаево-Чeркессия</h2>
-              <img src="./images/like.png" class="card__like" alt="Лайк">
+              <button class="card__like" type="button" aria-label="Лайк"></button>
             </div>
           </li>
         </ul>
@@ -73,15 +73,17 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
     <section class="popup">
-      <form class="popup__container">
-        <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <input type="text" class="popup__input popup__name-info" name="name" placeholder="Жак-Ив Кусто">
-        <input type="text" class="popup__input popup__job-info" name="job" placeholder="Исследователь океана">
-        <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
-      </form>
+      <div class="popup__container">
+        <form class="popup__form" name="editform">
+          <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" class="popup__input popup__input_type_name" name="name" placeholder="Жак-Ив Кусто">
+          <input type="text" class="popup__input popup__input_type_job" name="job" placeholder="Исследователь океана">
+          <button type="submit" class="popup__submit-button" aria-label="Сохранить">Сохранить</button>
+        </form>
+      </div>
     </section>
   </div>
-  <script src="./script.js"></script>
+  <script src="./scripts/script.js"></script>
 </body>
 </html>
