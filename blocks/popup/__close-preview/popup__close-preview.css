@@ -1,6 +1,6 @@
-.popup__preview_button_close {
+.popup__close-preview {
   all: initial;
-  background-image: url(../../../../images/close-icon.svg);
+  background-image: url(../../../images/close-icon.svg);
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
@@ -11,13 +11,13 @@
   cursor: pointer;
 }
 
-.popup__preview_button_close:hover {
+.popup__close-preview:hover {
   opacity: 60%;
   transition: opacity 0.5s linear;
 }
 
 @media screen and (max-width: 600px) {
-  .popup__preview_button_close {
+  .popup__close-preview {
     top: -36px;
     right: 0;
     min-width: 20px;

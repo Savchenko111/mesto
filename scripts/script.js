@@ -27,18 +27,18 @@ const initialCards = [
 
 const editButton = document.querySelector('.profile__edit-button'); //кнопка "Редактировать"
 const addButton = document.querySelector('.profile__add-button'); //кнопка "Добавить"
-const popupEdit = document.querySelector('.popup__edit-profile'); //попап редактирования профиля
-const popupAddCard = document.querySelector('.popup__add-card'); //попап добавления карточки
-const popupPreview = document.querySelector('.popup__preview'); //попап открытия большого фото
+const popupEdit = document.querySelector('.popup_type_editprofile'); //попап редактирования профиля
+const popupAddCard = document.querySelector('.popup_type_addcard'); //попап добавления карточки
+const popupPreview = document.querySelector('.popup_type_preview'); //попап открытия большого фото
 
 //кнопка "Закрыть" попапа редактирования профиля
-const closeButtonPopupEdit = document.querySelector('.popup__edit-profile_button_close');
+const closeButtonPopupEdit = popupEdit.querySelector('.popup__close-button');
 
 //кнопка "Закрыть" попапа добавления карточки
-const closeButtonPopupAdd = document.querySelector('.popup__add-card_button_close');
+const closeButtonPopupAdd = popupAddCard.querySelector('.popup__close-button');
 
 //кнопка "Закрыть" попапа превью
-const closeButtonPopupPreview = document.querySelector('.popup__preview_button_close');
+const closeButtonPopupPreview = popupPreview.querySelector('.popup__close-preview');
 
 const popupEditForm = document.querySelector('.popup__editform'); //форма попапа редактирования профиля
 const popupAddForm = document.querySelector('.popup__addform'); //форма попапа добавления карточки

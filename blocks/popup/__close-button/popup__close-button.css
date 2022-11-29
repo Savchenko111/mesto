@@ -6,8 +6,8 @@
   position: absolute;
   min-width: 32px;
   min-height: 32px;
-  right: -76px;
-  top: -74px;
+  right: -40px;
+  top: -40px;
   cursor: pointer;
 }
 
@@ -20,6 +20,7 @@
   .popup__close-button {
     min-width: 20px;
     min-height: 20px;
-    right: -22px;
+    right: 0;
+    top: -36px;
   }
 }
