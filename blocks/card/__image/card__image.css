@@ -1,6 +1,7 @@
 .card__image {
   min-width: 282px;
   max-height: 282px;
+  aspect-ratio: 1/1;
   object-fit: cover;
   display: block;
 }

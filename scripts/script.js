@@ -1,44 +1,17 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-const editButton = document.querySelector('.profile__edit-button'); //кнопка "Редактировать"
-const addButton = document.querySelector('.profile__add-button'); //кнопка "Добавить"
+const buttonEditProfile = document.querySelector('.profile__edit-button'); //кнопка "Редактировать"
+const buttonAddCard = document.querySelector('.profile__add-button'); //кнопка "Добавить"
 const popupEdit = document.querySelector('.popup_type_editprofile'); //попап редактирования профиля
 const popupAddCard = document.querySelector('.popup_type_addcard'); //попап добавления карточки
 const popupPreview = document.querySelector('.popup_type_preview'); //попап открытия большого фото
 
 //кнопка "Закрыть" попапа редактирования профиля
-const closeButtonPopupEdit = popupEdit.querySelector('.popup__close-button');
+const buttonClosePopupEdit = popupEdit.querySelector('.popup__close-button');
 
 //кнопка "Закрыть" попапа добавления карточки
-const closeButtonPopupAdd = popupAddCard.querySelector('.popup__close-button');
+const buttonClosePopupAdd = popupAddCard.querySelector('.popup__close-button');
 
 //кнопка "Закрыть" попапа превью
-const closeButtonPopupPreview = popupPreview.querySelector('.popup__close-preview');
+const buttonClosePopupPreview = popupPreview.querySelector('.popup__close-preview');
 
 const popupEditForm = document.querySelector('.popup__editform'); //форма попапа редактирования профиля
 const popupAddForm = document.querySelector('.popup__addform'); //форма попапа добавления карточки
@@ -63,10 +36,15 @@ const list = document.querySelector('.cards__list'); //получаем роди
 //здесь лежит li, взятый из template
 const itemTemplate = document.querySelector('.template').content.querySelector('.card');
 
-//функция открытия и закрытия попапа
-function togglePopup(element) {
-  element.classList.toggle('popup_opened');
-};
+//функция открытия попапа
+function openPopup(element) {
+  element.classList.add('popup_opened');
+}
+
+//функция закрытия попапа
+function closePopup(element) {
+  element.classList.remove('popup_opened');
+}
 
 //функция, которая сохраняет в профиле значения, введенные в поля попапа и закрывает попап
 function formSubmitHandler (evt) {
@@ -75,7 +53,7 @@ function formSubmitHandler (evt) {
   profileName.textContent = inputNameInfo.value;
   profileJob.textContent = inputJobInfo.value;
 
-  togglePopup(popupEdit);
+  closePopup(popupEdit);
 }
 
 //функция отрисовывает карточку через вспомогательную функцию createCard и добавляет ее в DOM
@@ -135,44 +113,45 @@ function handleImage(data) {
   bigImage.src = data.link;
   cardName.textContent = data.name;
 
-  togglePopup(popupPreview); //открытие модального окна
+  openPopup(popupPreview); //открытие модального окна
 }
 
 //функция создания новой карточки по данным, введенным пользователем
 function handleAddNewCard(event) {
   event.preventDefault();
   render({name: inputAddTitle.value, link: inputAddLink.value});
-  togglePopup(popupAddCard);
+
+  closePopup(popupAddCard);
 }
 
 //на кнопку редактирования профиля навешиваем слушатель, 
 //в случае клика открывается попап, поля заполнены значениями из профиля
-editButton.addEventListener('click', () => {
-  togglePopup(popupEdit);
+buttonEditProfile.addEventListener('click', () => {
+  openPopup(popupEdit);
   inputNameInfo.textContent = profileName.value;
   inputJobInfo.textContent = profileJob.value;
 });
 
 //на кнопку добавления карточки навешиваем слушатель
-addButton.addEventListener('click', () => {
-  togglePopup(popupAddCard);
+buttonAddCard.addEventListener('click', () => {
+  openPopup(popupAddCard);
 });
 
 //слушатель сабмита на форму попапа редактирования профиля
 popupEditForm.addEventListener('submit', formSubmitHandler);
 
 //слушатель на кнопку "Закрыть" попапа редактирования профиля
-closeButtonPopupEdit.addEventListener('click', () => {
-  togglePopup(popupEdit);
+buttonClosePopupEdit.addEventListener('click', () => {
+  closePopup(popupEdit);
 });
 
 //слушатель на кнопку "Закрыть" попапа добавления карточки
-closeButtonPopupAdd.addEventListener('click', () => {
-  togglePopup(popupAddCard);
+buttonClosePopupAdd.addEventListener('click', () => {
+  closePopup(popupAddCard);
 });
 
-closeButtonPopupPreview.addEventListener('click', () => {
-  togglePopup(popupPreview);
+buttonClosePopupPreview.addEventListener('click', () => {
+  closePopup(popupPreview);
 });
 
 initialCards.forEach(render);
