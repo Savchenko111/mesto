@@ -128,8 +128,8 @@ function handleAddNewCard(event) {
 //в случае клика открывается попап, поля заполнены значениями из профиля
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEdit);
-  inputNameInfo.textContent = profileName.value;
-  inputJobInfo.textContent = profileJob.value;
+  inputNameInfo.value = profileName.textContent;
+  inputJobInfo.value = profileJob.textContent;
 });
 
 //на кнопку добавления карточки навешиваем слушатель
