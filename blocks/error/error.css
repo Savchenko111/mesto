@@ -1,0 +1,9 @@
+.error {
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 1.21;
+  margin-top: 5px;
+  box-sizing: border-box;
+  display: block;
+  min-height: 25px;
+}

@@ -39,11 +39,13 @@ const itemTemplate = document.querySelector('.template').content.querySelector('
 //функция открытия попапа
 function openPopup(element) {
   element.classList.add('popup_opened');
+  document.addEventListener('keydown', handleKeyDown);
 }
 
 //функция закрытия попапа
 function closePopup(element) {
   element.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleKeyDown);
 }
 
 //функция, которая сохраняет в профиле значения, введенные в поля попапа и закрывает попап
@@ -123,6 +125,33 @@ function handleAddNewCard(event) {
 
   closePopup(popupAddCard);
 }
+
+//закрываем попап по нажатию кнопки Escape
+function handleKeyDown(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+
+//закрываем попап по клику на оверлей
+function closePopupOverlay(element) {
+  element.addEventListener('click', function(evt) {
+    if (!evt.target.closest('.popup__container')) {
+      closePopup(element);
+    }
+  })
+}
+
+closePopupOverlay(popupEdit);
+closePopupOverlay(popupAddCard);
+closePopupOverlay(popupPreview);
+
+
+
+
+
+
 
 //на кнопку редактирования профиля навешиваем слушатель, 
 //в случае клика открывается попап, поля заполнены значениями из профиля
