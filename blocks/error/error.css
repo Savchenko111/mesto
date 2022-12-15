@@ -3,7 +3,8 @@
   font-size: 12px;
   line-height: 1.21;
   margin-top: 5px;
-  box-sizing: border-box;
   display: block;
-  min-height: 25px;
+  height: 25px;
+  max-width: 358px;
+  visibility: hidden;
 }

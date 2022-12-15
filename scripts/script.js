@@ -49,7 +49,7 @@ function closePopup(element) {
 }
 
 //функция, которая сохраняет в профиле значения, введенные в поля попапа и закрывает попап
-function formSubmitHandler (evt) {
+function submitEditProfileForm (evt) {
   evt.preventDefault();
 
   profileName.textContent = inputNameInfo.value;
@@ -59,7 +59,7 @@ function formSubmitHandler (evt) {
 }
 
 //функция отрисовывает карточку через вспомогательную функцию createCard и добавляет ее в DOM
-function render(data) {
+function renderCard(data) {
   const newCard = createCard(data);
   list.prepend(newCard);
 }
@@ -93,7 +93,7 @@ function setListenersForItem(card, data) {
   //получаем в качестве элемента кнопку, которая занимает весь размер картинки
   const cardImageButton = card.querySelector('.card__image-button');
   //навешиваем слушатель на кнопку-картинку, при клике выполняется функция handleImage
-  //события event нет
+  
   cardImageButton.addEventListener('click', () => {
     handleImage(data);
   });
@@ -114,6 +114,7 @@ function handleImage(data) {
   //контент модального окна
   bigImage.src = data.link;
   cardName.textContent = data.name;
+  bigImage.alt = data.name;
 
   openPopup(popupPreview); //открытие модального окна
 }
@@ -121,7 +122,7 @@ function handleImage(data) {
 //функция создания новой карточки по данным, введенным пользователем
 function handleAddNewCard(event) {
   event.preventDefault();
-  render({name: inputAddTitle.value, link: inputAddLink.value});
+  renderCard({name: inputAddTitle.value, link: inputAddLink.value});
 
   closePopup(popupAddCard);
 }
@@ -147,14 +148,7 @@ closePopupOverlay(popupEdit);
 closePopupOverlay(popupAddCard);
 closePopupOverlay(popupPreview);
 
-
-
-
-
-
-
-//на кнопку редактирования профиля навешиваем слушатель, 
-//в случае клика открывается попап, поля заполнены значениями из профиля
+//на кнопку редактирования профиля навешиваем слушатель, в случае клика открывается попап, поля заполнены значениями из профиля
 buttonEditProfile.addEventListener('click', () => {
   openPopup(popupEdit);
   inputNameInfo.value = profileName.textContent;
@@ -167,7 +161,7 @@ buttonAddCard.addEventListener('click', () => {
 });
 
 //слушатель сабмита на форму попапа редактирования профиля
-popupEditForm.addEventListener('submit', formSubmitHandler);
+popupEditForm.addEventListener('submit', submitEditProfileForm);
 
 //слушатель на кнопку "Закрыть" попапа редактирования профиля
 buttonClosePopupEdit.addEventListener('click', () => {
@@ -177,12 +171,14 @@ buttonClosePopupEdit.addEventListener('click', () => {
 //слушатель на кнопку "Закрыть" попапа добавления карточки
 buttonClosePopupAdd.addEventListener('click', () => {
   closePopup(popupAddCard);
+  inputAddTitle.value = '';
+  inputAddLink.value = '';
 });
 
 buttonClosePopupPreview.addEventListener('click', () => {
   closePopup(popupPreview);
 });
 
-initialCards.forEach(render);
+initialCards.forEach(renderCard);
 
 popupAddForm.addEventListener('submit', handleAddNewCard);
