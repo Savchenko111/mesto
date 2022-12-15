@@ -157,6 +157,10 @@ buttonEditProfile.addEventListener('click', () => {
 
 //на кнопку добавления карточки навешиваем слушатель
 buttonAddCard.addEventListener('click', () => {
+  popupAddForm.reset();
+  const buttonSubmit = popupAddForm.querySelector(validationConfig.submitButtonSelector);
+  buttonSubmit.classList.add(validationConfig.inactiveButtonClass);
+  buttonSubmit.setAttribute('disabled', true);
   openPopup(popupAddCard);
 });
 
