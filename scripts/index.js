@@ -1,3 +1,4 @@
+import { initialCards } from './cards.js';
 import { FormValidator } from './FormValidator.js';
 import { Card } from './Card.js';
 
@@ -34,7 +35,7 @@ const profileJob = document.querySelector('.profile__profession');
 const bigImage = document.querySelector('.popup__big-image'); //увеличенная картинка
 const cardName = document.querySelector('.popup__card-name'); //подпись под увеличенной картинкой
 
-const list = document.querySelector('.cards__list'); //получаем родительский элемент карточки
+const cardsContainer = document.querySelector('.cards__list'); //получаем родительский элемент карточки
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -84,7 +85,7 @@ function handleImage(data) {
 function renderCard(data) {
   const card = new Card(data, '.template', handleImage);
   const cardElement = card.createCard();
-  list.prepend(cardElement);
+  cardsContainer.prepend(cardElement);
 }
 
 //функция создания новой карточки по данным, введенным пользователем
