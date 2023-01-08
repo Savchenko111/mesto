@@ -1,3 +1,6 @@
+import { FormValidator } from './FormValidator.js';
+import { Card } from './Card.js';
+
 const buttonEditProfile = document.querySelector('.profile__edit-button'); //кнопка "Редактировать"
 const buttonAddCard = document.querySelector('.profile__add-button'); //кнопка "Добавить"
 const popupEdit = document.querySelector('.popup_type_editprofile'); //попап редактирования профиля
@@ -33,8 +36,20 @@ const cardName = document.querySelector('.popup__card-name'); //подпись �
 
 const list = document.querySelector('.cards__list'); //получаем родительский элемент карточки
 
-//здесь лежит li, взятый из template
-const itemTemplate = document.querySelector('.template').content.querySelector('.card');
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_invalid',
+  errorClass: 'error_active'
+}
+
+const validationOfPopupEdit = new FormValidator(validationConfig, popupEditForm);
+validationOfPopupEdit.enableValidation();
+
+const validationOfPopupAdd = new FormValidator(validationConfig, popupAddForm);
+validationOfPopupAdd.enableValidation();
 
 //функция открытия попапа
 function openPopup(element) {
@@ -58,65 +73,18 @@ function submitEditProfileForm (evt) {
   closePopup(popupEdit);
 }
 
-//функция отрисовывает карточку через вспомогательную функцию createCard и добавляет ее в DOM
-function renderCard(data) {
-  const newCard = createCard(data);
-  list.prepend(newCard);
-}
-
-//функция создает и возвращает карточку
-function createCard(data) {
-  const cardElement = itemTemplate.cloneNode(true); //клонируем ноду
-  const cardImage = cardElement.querySelector('.card__image'); //получаем элемент - картинку в карточке
-  const cardTitle = cardElement.querySelector('.card__title'); //получаем элемент - название карточки
-  cardTitle.textContent = data.name; //устанавливаем значение для названия карточки
-  cardImage.src = data.link; //устанавливаем ссылку на картинку
-  cardImage.alt = data.name; //устанавливаем значение атрибута alt для картинки
-
-  setListenersForItem(cardElement, data); //навешиваем слушатели на каждую карточку
-
-  return cardElement;
-}
-
-//функция навешивания слушателей на кнопки внутри карточки
-function setListenersForItem(card, data) {
-  //получаем в качестве элемента кнопку удаления карточки
-  const cardDeleteButton = card.querySelector('.card__delete');
-  //навешиваем слушатель на кнопку удаления карточки, при клике выполняется функция handleDelete, событие event
-  cardDeleteButton.addEventListener('click', handleDelete);
-
-  //получаем в качестве элемента кнопку лайка
-  const cardLikeButton = card.querySelector('.card__like');
-  //навешиваем слушатель на лайк, при клике выполняется функция handleLike, событие event
-  cardLikeButton.addEventListener('click', handleLike);
-
-  //получаем в качестве элемента кнопку, которая занимает весь размер картинки
-  const cardImageButton = card.querySelector('.card__image-button');
-  //навешиваем слушатель на кнопку-картинку, при клике выполняется функция handleImage
-  
-  cardImageButton.addEventListener('click', () => {
-    handleImage(data);
-  });
-}
-
-function handleDelete(event) {
-  event.target.closest('.card').remove();
-}
-
-function handleLike(event) {
-  event.target.classList.toggle('card__like_button_active');
-}
-
 function handleImage(data) {
-  //1. Наполнить модальное окно данными
-  //2. Открыть модальное окно
-
-  //контент модального окна
   bigImage.src = data.link;
   cardName.textContent = data.name;
   bigImage.alt = data.name;
 
   openPopup(popupPreview); //открытие модального окна
+}
+
+function renderCard(data) {
+  const card = new Card(data, '.template', handleImage);
+  const cardElement = card.createCard();
+  list.prepend(cardElement);
 }
 
 //функция создания новой карточки по данным, введенным пользователем
@@ -157,10 +125,7 @@ buttonEditProfile.addEventListener('click', () => {
 
 //на кнопку добавления карточки навешиваем слушатель
 buttonAddCard.addEventListener('click', () => {
-  popupAddForm.reset();
-  const buttonSubmit = popupAddForm.querySelector(validationConfig.submitButtonSelector);
-  buttonSubmit.classList.add(validationConfig.inactiveButtonClass);
-  buttonSubmit.setAttribute('disabled', true);
+  validationOfPopupAdd.resetErrors();
   openPopup(popupAddCard);
 });
 
@@ -183,6 +148,8 @@ buttonClosePopupPreview.addEventListener('click', () => {
   closePopup(popupPreview);
 });
 
-initialCards.forEach(renderCard);
+initialCards.forEach((data) => {
+  renderCard(data);
+})
 
 popupAddForm.addEventListener('submit', handleAddNewCard);
